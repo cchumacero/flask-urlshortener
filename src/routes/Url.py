@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect
 from models.url import Url
 from utils.db import db
-from models.urlSchema import UrlSchema
+from models.urlSchema import UrlSchema, url_schema, urls_schema
 
 main=Blueprint('url_blueprint', __name__)
 
@@ -9,7 +9,6 @@ main=Blueprint('url_blueprint', __name__)
 def get_urls():
     try:
         urls = Url.query.all()
-        urls_schema = UrlSchema(many=True)
         result = urls_schema.dump(urls)
         return jsonify(result)
     except Exception as ex:
@@ -18,7 +17,6 @@ def get_urls():
 @main.route('/', methods=['POST'])
 def get_url():
     url = request.args.get('url')
-    url_schema = UrlSchema()
     try:
         try:
             short_url = Url.query.filter_by(original_url = url).one()
@@ -39,7 +37,6 @@ def redirectUrl(id):
     try:
         url = Url.query.get(id)
         if url is not None:
-            url_schema = UrlSchema()
             result = url_schema.dump(url) 
             return redirect(result['original_url'])
         else: return jsonify({'message': "Short Url Does Not Exist"}),404

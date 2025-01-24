@@ -18,21 +18,23 @@ def get_urls():
 @main.route('/', methods=['POST'])
 def get_url():
     try:
-        requested_url = request.args.get('url')
         requested_url = url_schema.load(request.json)
         url = requested_url['original_url']
-        try:
-            short_url = Url.query.filter_by(original_url = url).one()
-        except Exception as NotFound:
+        
+        short_url = Url.query.filter_by(original_url = url).one_or_none()
+        
+        if short_url is None:
             new_short_url = str(uuid.uuid4())[:8]
             new_url = Url(url, new_short_url)
             db.session.add(new_url)
             db.session.commit()
-            short_url = Url.query.filter_by(original_url = url).one()
+            short_url = new_url 
         result = url_schema.dump(short_url)        
         return jsonify(result)
+                     
+        
     except Exception as ex:
-        return jsonify({'message': str(ex)}),500
+        return jsonify({'message': str(ex)}), 500
     
 @main.route('/<id>')
 def redirectUrl(id):

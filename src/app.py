@@ -3,6 +3,7 @@ from config import config
 from utils.db import db
 from flask_marshmallow import Marshmallow
 from dotenv import load_dotenv
+from flask_limiter import Limiter
 import os
 
 # routes
@@ -12,6 +13,12 @@ load_dotenv()
 app = Flask(__name__)
 ma = Marshmallow(app)
 
+limiter =  Limiter(
+    key_func=lambda: "global",
+    app=app,
+    storage_uri= os.getenv('UPSTASH_CACHE_URL'),
+    default_limits=["1000 per day", "100 per hour"] 
+)
 
 def page_not_found(error):
     return "<h1> Not Found Page</h1>", 404

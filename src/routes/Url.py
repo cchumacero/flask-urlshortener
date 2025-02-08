@@ -2,11 +2,14 @@ from flask import Blueprint, jsonify, request, redirect
 from models.url import Url
 from utils.db import db
 from models.urlSchema import url_schema, urls_schema
+from app import limiter
 import uuid
 
 main=Blueprint('url_blueprint', __name__)
 
+
 @main.route('/urls')
+@limiter.limit("10 per hour")
 def get_urls():
     try:
         urls = Url.query.all()

@@ -9,7 +9,7 @@ main=Blueprint('url_blueprint', __name__)
 
 
 @main.route('/urls')
-@limiter.limit("10 per hour")
+@limiter.limit("100 per hour")
 def get_urls():
     try:
         urls = Url.query.all()

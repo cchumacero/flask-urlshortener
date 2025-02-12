@@ -1,4 +1,4 @@
-from utils.db import db
+from utils.extensions import db
 
 class Url(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

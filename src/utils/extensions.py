@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
 from flask_limiter import Limiter
+from flask_jwt_extended import JWTManager
 import os
 
 db = SQLAlchemy()
@@ -12,3 +13,5 @@ limiter =  Limiter(
     storage_uri= os.getenv('UPSTASH_CACHE_URL'),
     default_limits=["1000 per day", "100 per hour"] 
 )
+
+jwt = JWTManager()

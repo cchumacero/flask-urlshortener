@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, redirect
 from models.url import Url
-from utils.db import db
+from utils.extensions import db
 from models.urlSchema import url_schema, urls_schema
 from app import limiter
 import uuid

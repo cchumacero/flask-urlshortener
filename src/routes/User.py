@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request, redirect
 from models.user import User
-from models.url import Url
 from utils.extensions import db
 from models.userSchema import user_register_schema, user_login_schema
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity

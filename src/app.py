@@ -9,13 +9,15 @@ from routes import Url, User
 def create_app():
     load_dotenv()
     app = Flask(__name__)
+    
+    enviroment = os.environ.get('FLASK_ENV')
 
     @app.route('/')
     def index():
         return render_template('index.html')
     
     # Configuración de la app
-    app.config.from_object(config['development'])
+    app.config.from_object(config[enviroment])
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('POSTGRESQL_DB')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')

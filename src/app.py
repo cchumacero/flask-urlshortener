@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from config import config
 from utils.extensions import db, ma, migrate, limiter, jwt
 from dotenv import load_dotenv
@@ -10,6 +10,10 @@ def create_app():
     load_dotenv()
     app = Flask(__name__)
 
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+    
     # Configuración de la app
     app.config.from_object(config['development'])
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('POSTGRESQL_DB')
@@ -33,6 +37,8 @@ def create_app():
         return "<h1> Not Found Page</h1>", 404
 
     return app
+
+
 
 if __name__ == '__main__':
     app = create_app() 

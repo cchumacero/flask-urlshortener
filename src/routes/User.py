@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request, redirect
 from models.user import User
+from models.url import Url
 from utils.extensions import db
 from models.userSchema import user_register_schema, user_login_schema
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from marshmallow import ValidationError
 import uuid
 
@@ -15,7 +16,6 @@ def register():
     username = data['username']
     email = data['email']
     password = data['password']
-    print(data)
     if User.query.filter_by(username=username).first():
         return jsonify({"msg": "El usuario ya existe"}), 400
     

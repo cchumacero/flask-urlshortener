@@ -40,12 +40,10 @@ def get_urls():
 @main.route('/urls')
 @jwt_required()
 def get_user_urls():
-    user_id = get_jwt_identity()  # Obtener el ID del usuario autenticado
+    user_id = get_jwt_identity()
     
-    # Obtener todas las URLs del usuario
     user_urls = Url.query.filter_by(user_id=user_id).all()
     
-    # Serializar y devolver las URLs
     result = urls_schema.dump(user_urls)
     return jsonify(result), 200
 

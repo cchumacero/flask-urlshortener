@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+</head>
+<body>
+    <header>
+        <h1>MiniatURL</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Paste your URL</h2>
+            <form action="/api/shorturl" method="post">
+                <fieldset>
+                <input type="url" name="original_url" id="original_url" required>
+                <input type="submit" value="Shorten!">
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h3>Shorten your URLs! Not your experience!</h3>
+            <p>
+                Get unlimited short links, custom short urls and detailed analytics.
+            </p>
+            <button>Create Account</button>
+        </section>
+    </main>
+    
+</body>
+</html>

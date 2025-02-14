@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+</head>
+<body>
+    <header>
+        <h1>MiniatURL</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Your shortened URL</h2>
+            <fieldset>
+                <input type="url" name="" id="shortUrlInput" value="{{ BASE_URL }}/api/shorturl/{{result.short_url}}">
+                <button class="copyButton" onclick="copyUrl()">Copy URL</button>
+            </fieldset>
+        </section>
+        <section>
+            <p>URL: <a href="{{result.original_url}}"> {{ result.original_url }} </a></p>
+            <a href="{{ BASE_URL }}">Shorten another URL</a>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+</body>
+</html>

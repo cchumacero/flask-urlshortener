@@ -33,6 +33,10 @@ def create_app():
     app.register_blueprint(Url.main, url_prefix='/api/shorturl')
     app.register_blueprint(User.user_route, url_prefix='/api/user')
     
+    @app.context_processor
+    def inject_base_url():
+        return dict(BASE_URL=app.config['BASE_URL'])
+    
     # Errors Handlers
     @app.errorhandler(404)
     def page_not_found(error):

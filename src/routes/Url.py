@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, redirect
+from flask import Blueprint, jsonify, request, redirect, render_template
 from models.url import Url
 from utils.extensions import db, limiter
 from models.urlSchema import url_schema, urls_schema
@@ -55,7 +55,8 @@ def get_user_urls():
 def get_url():
     verify_jwt_in_request(optional=True)
     try:
-        requested_url = url_schema.load(request.json)
+        url = request.form.get('original_url')
+        requested_url = url_schema.load({'original_url': url})
         url = requested_url['original_url']
         
         short_url = Url.query.filter_by(original_url = url).one_or_none()
@@ -67,8 +68,7 @@ def get_url():
             db.session.commit()
             short_url = new_url 
         result = url_schema.dump(short_url)        
-        return jsonify(result)
-                     
+        return render_template("shortUrl.html", result=result)            
         
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500

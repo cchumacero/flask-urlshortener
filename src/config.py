@@ -11,7 +11,7 @@ class DevelopmentConfig(Config):
     
 class ProductionConfig(Config):
     DEBUG = True
-    BASE_URL='http://tudominio.com'
+    BASE_URL='https://miniaturl.vercel.app'
 
 config = {
     'development': DevelopmentConfig,

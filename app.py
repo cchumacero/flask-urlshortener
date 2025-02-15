@@ -11,10 +11,6 @@ def create_app():
     app = Flask(__name__)
     
     enviroment = os.environ.get('FLASK_ENV')
-
-    @app.route('/')
-    def index():
-        return render_template('index.html')
     
     # Configuración de la app
     app.config.from_object(config[enviroment])
@@ -47,5 +43,10 @@ def create_app():
 
 
 if __name__ == '__main__':
-    app = create_app() 
+    app = create_app()
+    
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+    
     app.run()

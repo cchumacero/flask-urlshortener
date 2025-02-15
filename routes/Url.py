@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request, redirect, render_template, sessio
 from models.url import Url
 from utils.extensions import db, limiter
 from models.urlSchema import url_schema, urls_schema
-from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request, jwt_required
 from flask_limiter.util import get_remote_address
 import uuid
 from functools import wraps

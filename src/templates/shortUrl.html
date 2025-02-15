@@ -18,8 +18,8 @@
             </fieldset>
         </section>
         <section>
-            <p>URL: <a href="{{result.original_url}}"> {{ result.original_url }} </a></p>
-            <a href="{{ BASE_URL }}">Shorten another URL</a>
+            <p>URL: <a href="{{result.original_url}}" target="_blank"> {{ result.original_url }} </a></p>
+            <a href="/">Shorten another URL</a>
         </section>
     </main>
     <script src="{{ url_for('static', filename='js/layout.js') }}"></script>

@@ -7,7 +7,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    BASE_URL='http://localhost:5000'
+    BASE_URL='https://miniaturl.vercel.app'
     
 class ProductionConfig(Config):
     DEBUG = False

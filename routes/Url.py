@@ -61,10 +61,12 @@ def get_url():
         url = requested_url['original_url']
         
         short_url = Url.query.filter_by(original_url = url).one_or_none()
-            
+        user = None
+        if current_user.is_authenticated:
+            user = current_user.id
         if short_url is None:
             new_short_url = str(uuid.uuid4())[:8]
-            new_url = Url(url, new_short_url, session.get('user_id'))
+            new_url = Url(url, new_short_url, user)
             db.session.add(new_url)
             db.session.commit()
             short_url = new_url 

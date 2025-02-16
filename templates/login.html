@@ -1,43 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
-    <link rel="icon" href="../static/img/scissor.png" type="image/x-icon" />
-</head>
-<body>
-    <header>
-        <h1>MiniatURL</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Login</h2>
-            <!-- Mostrar mensajes flash -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <ul>
-                    {% for category, message in messages %}
-                        <li class="{{ category }}">{{ message }}</li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-            <form id="loginForm" action="/api/user/login" method="post">
-                <fieldset>
-                    <label for="">Email or Username:
-                        <input type="text" name="username" id="" required>
-                    </label>
-                    <br>
-                    <label for="">Password:
-                        <input type="password" name="password" id="password" required>
-                    </label>
-                    <br>
-                    <input type="submit" value="Sing In">
-                </fieldset>
-            </form>
-        </section>
-    </main>
-    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
-</body>
-</html>
+{% extends './base.html' %}
+
+{% block body %}
+<main class="centermain">
+    <section>
+        <h2>Login</h2>
+        <!-- Mostrar mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form id="loginForm" action="/api/user/login" method="post">
+            <fieldset>
+                <input type="hidden"  name="csrf_token" value="{{ csrf_token() }}">
+                <label for="">Email or Username:
+                    <input type="text" name="username" id="" required>
+                </label>
+                <br>
+                <label for="">Password:
+                    <input type="password" name="password" id="password" required>
+                </label>
+                <br>
+                <input type="submit" value="Sing In">
+            </fieldset>
+        </form>
+        <a href="/api/user/register">Create Account</a>
+    </section>
+</main>
+<script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+{% endblock %}

@@ -1,33 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
-    <link rel="icon" href="../static/img/scissor.png" type="image/x-icon" />
-</head>
-<body>
-    <header>
-        <h1>MiniatURL</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Paste your URL</h2>
-            <form action="/api/shorturl" method="post">
-                <fieldset>
-                <input type="url" name="original_url" id="original_url" required>
-                <input type="submit" value="Shorten!">
-                </fieldset>
-            </form>
-        </section>
-        <section>
-            <h3>Shorten your URLs! Not your experience!</h3>
-            <p>
-                Get unlimited short links, custom short urls and detailed analytics.
-            </p>
-            <a href="/api/user/register">Create Account</a>
-        </section>
-    </main>
-    
-</body>
-</html>
+{% extends './base.html' %}
+
+{% block header %}
+{% if current_user.is_authenticated %}
+<a href="/api/user/logout">
+    Logout
+ </a>
+{% else %}
+<a href="/api/user/login">
+    Login
+ </a>
+ {% endif %}
+{% endblock %}
+{% block body %}
+<main class="centermain">
+    <section>
+        <h2>Paste your URL</h2>
+        <form action="/api/shorturl" method="post">
+            <fieldset>
+            <input type="url" name="original_url" id="original_url" required>
+            <input type="submit" value="Shorten!">
+            </fieldset>
+        </form>
+    </section>
+    <section>
+        <h3>Shorten your URLs! Not your experience!</h3>
+        <p>
+            Get unlimited short links, custom short urls and detailed analytics.
+        </p>
+        {% if current_user.is_anonymous %}         
+        <a href="/api/user/register">Create Account</a>
+        {% endif %}
+        
+    </section>
+</main>
+{% endblock %}

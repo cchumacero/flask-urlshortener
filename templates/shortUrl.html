@@ -1,28 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
-    <link rel="icon" href="../static/img/scissor.png" type="image/x-icon" />
-</head>
-<body>
-    <header>
-        <h1>MiniatURL</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Your shortened URL</h2>
-            <fieldset>
-                <input type="url" name="" id="shortUrlInput" value="{{ BASE_URL }}/api/shorturl/{{result.short_url}}">
-                <button class="copyButton" onclick="copyUrl()">Copy URL</button>
-            </fieldset>
-        </section>
-        <section>
-            <p>URL: <a href="{{result.original_url}}" target="_blank"> {{ result.original_url }} </a></p>
-            <a href="/">Shorten another URL</a>
-        </section>
-    </main>
-    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
-</body>
-</html>
+{% extends './base.html' %}
+
+{% block header %}
+{% if current_user.is_authenticated %}
+<a href="/api/user/logout">
+    Logout
+ </a>
+{% else %}
+<a href="/api/user/login">
+    Login
+ </a>
+ {% endif %}
+{% endblock %}
+
+{% block body %}
+<main class="centermain">
+    <section>
+        <h2>Your shortened URL</h2>
+        <fieldset>
+            <input type="url" name="" id="shortUrlInput" value="{{ BASE_URL }}/api/shorturl/{{result.short_url}}">
+            <button class="copyButton" onclick="copyUrl()">Copy URL</button>
+        </fieldset>
+    </section>
+    <section>
+        <p>URL: <a href="{{result.original_url}}" target="_blank"> {{ result.original_url }} </a></p>
+        <a href="/">Shorten another URL</a>
+    </section>
+</main>
+<script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+{% endblock %}

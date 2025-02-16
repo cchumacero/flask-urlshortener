@@ -20,6 +20,7 @@ def registerForm():
     return render_template("register.html")
 
 @user_route.route('/register', methods=['POST'])
+@csrf.exempt
 def register():
     form_username = request.form.get('form_name')
     form_email = request.form.get('form_email')

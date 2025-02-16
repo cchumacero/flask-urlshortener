@@ -26,7 +26,7 @@ def create_app():
     jwt.init_app(app)
     login_manager.init_app(app)
     csrf.init_app(app)
-    
+    csrf.exempt(Url.main)
     # Blueprints
     app.register_blueprint(Url.main, url_prefix='/api/shorturl')
     app.register_blueprint(User.user_route, url_prefix='/api/user')
@@ -34,6 +34,8 @@ def create_app():
     @app.context_processor
     def inject_base_url():
         return dict(BASE_URL=app.config['BASE_URL'])
+    
+    
     
     # Errors Handlers
     @app.errorhandler(404)

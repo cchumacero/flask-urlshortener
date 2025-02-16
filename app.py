@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from config import config
-from utils.extensions import db, ma, migrate, limiter, jwt
+from utils.extensions import db, ma, migrate, limiter, jwt, login_manager, csrf
 from dotenv import load_dotenv
 import os
 # routes
@@ -24,6 +24,8 @@ def create_app():
     migrate.init_app(app, db)
     limiter.init_app(app)
     jwt.init_app(app)
+    login_manager.init_app(app)
+    csrf.init_app(app)
     
     # Blueprints
     app.register_blueprint(Url.main, url_prefix='/api/shorturl')
@@ -37,6 +39,10 @@ def create_app():
     @app.errorhandler(404)
     def page_not_found(error):
         return "<h1> Not Found Page</h1>", 404
+    
+    @app.errorhandler(401)
+    def status_401(error):
+        return redirect(url_for('user_blueprint.login'))
 
     return app
 

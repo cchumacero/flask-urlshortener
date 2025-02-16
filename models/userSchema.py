@@ -9,7 +9,8 @@ class userRegisterSchema(ma.Schema):
     email = ma.String(required = True, validate=[validate.Email()])
     password = ma.String(required = True)
 
-class userLoginSchema(ma.Schema):    
+class userLoginSchema(ma.Schema):
+    csrf_token = ma.String(required = True)    
     username = ma.String(required = True)
     password = ma.String(required = True)
     

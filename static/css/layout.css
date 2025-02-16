@@ -7,3 +7,7 @@
 .centermain {
     text-align: center;
 }
+
+.withoutDot {
+    list-style-type: None;
+}

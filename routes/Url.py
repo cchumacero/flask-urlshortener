@@ -5,6 +5,7 @@ from models.urlSchema import url_schema, urls_schema
 from flask_limiter.util import get_remote_address
 import uuid
 from functools import wraps
+from flask_login import login_required, current_user
 
 
 main=Blueprint('url_blueprint', __name__)
@@ -28,15 +29,6 @@ def is_authenticated():
     else:
         return True
 
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' not in session:
-            flash("Debes iniciar sesión para acceder a esta página", "error")
-            return redirect(url_for('user_route.login'))
-        return f(*args, **kwargs)
-    return decorated_function
-
 @main.route('/allurls')
 def get_urls():
     try:
@@ -49,7 +41,7 @@ def get_urls():
 @main.route('/urls')
 @login_required
 def get_user_urls():
-    user_id = session.get('user_id')
+    user_id = current_user.id
     
     user_urls = Url.query.filter_by(user_id=user_id).all()
     

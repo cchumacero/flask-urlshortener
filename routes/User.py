@@ -1,13 +1,19 @@
 from flask import Blueprint, jsonify, request, redirect, render_template, url_for, session, flash
 from models.user import User
-from utils.extensions import db
+from utils.extensions import db, login_manager, csrf
 from models.userSchema import user_register_schema, user_login_schema
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_login import  login_user, logout_user
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from marshmallow import ValidationError
 import uuid
 import json
 
+
 user_route=Blueprint('user_blueprint', __name__)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 @user_route.route("/register", methods=['GET'])
 def registerForm():
@@ -55,6 +61,7 @@ def login():
         flash('Error de validación', 'error')
         return redirect(url_for('user_blueprint.login'))
     
+    
     username_or_email = data['username']
     password = data['password']
 
@@ -64,10 +71,8 @@ def login():
         user = User.query.filter_by(username=username_or_email).first()
 
     if user and user.check_password(password):
-        # access_token = create_access_token(identity=user.id)
-        # return jsonify(access_token=access_token), 200
-        session['user_id'] = user.id
-        # return render_template("index.html"), 200
+        # session['user_id'] = user.id
+        login_user(user)
         return redirect(url_for('index'))
     
     # return jsonify({"msg": "Usuario o contraseña incorrectos"}), 401
@@ -76,8 +81,9 @@ def login():
 
 @user_route.route('/logout')
 def logout():
-    session.clear()
-    return redirect(url_for('user_blueprint.login'), code=302)
+    # sssion.clear()
+    logout_user()
+    return redirect(url_for('index'), code=302)
 
 @user_route.route('/profile', methods=['GET'])
 @jwt_required()

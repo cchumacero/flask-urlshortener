@@ -12,22 +12,13 @@ main=Blueprint('url_blueprint', __name__)
 
 def get_rate_limit_key():
     try:
-        # verify_jwt_in_request(optional=True)
-        # user_id = get_jwt_identity()
-        user_id = session.get('user_id')
+        user_id = current_user.id
         if user_id:
             return f"user:{user_id}"
     except:
         pass
     
     return get_remote_address()
-
-def is_authenticated():
-    user_id = session.get('user_id')
-    if user_id is None:
-        return False
-    else:
-        return True
 
 @main.route('/allurls')
 def get_urls():
@@ -51,7 +42,7 @@ def get_user_urls():
 
 @main.route('/', methods=['POST'])
 @limiter.limit(
-    lambda: "100 per hour" if is_authenticated() else "5 per minute",
+    lambda: "100 per day" if current_user.is_authenticated else "15 per day",
     key_func=get_rate_limit_key
 )
 def get_url():

@@ -26,26 +26,22 @@
                 </ul>
             {% endif %}
         {% endwith %}
-        <form id="registrationForm" action="/api/user/register" method="post">
+        <form id="registrationForm" action="/api/user/register" method="post" class="form-container">
             <fieldset>
                 <label for="">Name:
-                    <input type="text" name="form_name" id="" required>
+                    <input type="text" name="form_name" class="form-input" required>
                 </label>
-                <br>
                 <label for="">Email:
-                    <input type="email" name="form_email" id="" required>
+                    <input type="email" name="form_email" class="form-input" required>
                 </label>
-                <br>
                 <label for="">Password:
-                    <input type="password" name="form_password" id="password" required>
+                    <input type="password" name="form_password" id="password" class="form-input" required>
                 </label>
-                <br>
                 <label for="">Confirm Password:
-                    <input type="password" name="form_confirm_password" id="confirm_password">
+                    <input type="password" name="form_confirm_password" id="confirm_password" class="form-input">
                 </label>
                 <span id="passwordError" class="error"></span>
-                <br>
-                <input type="submit" value="Sign Up">
+                <input type="submit" value="Sign Up" class="btn">
             </fieldset>
         </form>
     </section>

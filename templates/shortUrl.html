@@ -14,10 +14,10 @@
 
 {% block body %}
 <main class="centermain">
-    <section>
+    <section class="short-url-container">
         <h2>Your shortened URL</h2>
         <fieldset>
-            <input type="url" name="" id="shortUrlInput" value="{{ BASE_URL }}/api/shorturl/{{result.short_url}}">
+            <input type="url" id="shortUrlInput" value="{{ BASE_URL }}/api/shorturl/{{result.short_url}}">
             <button class="copyButton" onclick="copyUrl()">Copy URL</button>
         </fieldset>
     </section>

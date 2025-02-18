@@ -1,3 +1,4 @@
+/*
 .topright {
     position: absolute; 
     top: 8px; 
@@ -10,4 +11,169 @@
 
 .withoutDot {
     list-style-type: None;
+}
+*/
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+header h1 a:hover {
+    text-decoration: underline;
+}
+
+.topright {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.topright a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+.topright a:hover {
+    background-color: #004080;
+}
+
+/* Estilos para el contenido principal */
+.centermain {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    color: #007BFF;
+}
+
+/* Estilos para formularios */
+.form-container {
+    padding: 20px; /* Padding uniforme */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+.form-container fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-container .form-input {
+    width: 100%; /* Ocupa el 100% del ancho del contenedor */
+    padding: 10px; /* Padding uniforme */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.form-container .btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+}
+
+.form-container .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para mensajes flash */
+.withoutDot {
+    list-style-type: none;
+    padding: 0;
+}
+
+.withoutDot li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.withoutDot li.error {
+    background-color: #ffcccc;
+    color: #cc0000;
+}
+
+.withoutDot li.success {
+    background-color: #ccffcc;
+    color: #006600;
+}
+
+/* Estilos para la sección de URL acortada */
+.short-url-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.short-url-container #shortUrlInput {
+    width: calc(100% - 120px); /* Ajuste para el botón */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.short-url-container .copyButton {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+}
+
+.short-url-container .copyButton:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para enlaces */
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

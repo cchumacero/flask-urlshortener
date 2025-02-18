@@ -14,20 +14,19 @@
                 </ul>
             {% endif %}
         {% endwith %}
-        <form id="loginForm" action="/api/user/login" method="post">
+        <form id="loginForm" action="/api/user/login" method="post" class="form-container">
             <fieldset>
-                <input type="hidden"  name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <label for="">Email or Username:
-                    <input type="text" name="username" id="" required>
+                    <input type="text" name="username" class="form-input" required>
                 </label>
-                <br>
                 <label for="">Password:
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" name="password" class="form-input" required>
                 </label>
-                <br>
-                <input type="submit" value="Sing In">
+                <input type="submit" value="Sign In" class="btn">
             </fieldset>
         </form>
+        <br>
         <a href="/api/user/register">Create Account</a>
     </section>
 </main>
